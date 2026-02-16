@@ -4,6 +4,7 @@ import { NavItem, BlogPost, Professional } from './types';
 export const COMPANY_INFO = {
   name: 'Educandário Sodré',
   phone: '(71) 3309-5251',
+
   whatsapp: '5571992575862',
   address: 'Estrada do Matadouro, Águas Claras, Salvador - BA',
   googleMapsLink: 'https://www.google.com/maps/search/?api=1&query=Educandário+Sodré+Estrada+do+Matadouro+Águas+Claras+Salvador',

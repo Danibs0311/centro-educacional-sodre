@@ -76,3 +76,13 @@ export interface NavItem {
   path: string;
   subItems?: NavItem[];
 }
+
+export interface ContactMessage {
+  id: string;
+  created_at: string;
+  name: string;
+  phone?: string;
+  interest?: string;
+  message: string;
+  status: 'new' | 'read' | 'archived';
+}

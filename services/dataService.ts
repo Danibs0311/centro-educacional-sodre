@@ -1,5 +1,5 @@
 
-import { Message, Orientation, Student, User, UserType } from '../types';
+import { Message, Orientation, Student, User, UserType, ContactMessage } from '../types';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 export const dataService = {
@@ -30,12 +30,39 @@ export const dataService = {
     } catch (e) { return []; }
   },
 
+  getContactMessages: async (): Promise<ContactMessage[]> => {
+    if (!isSupabaseConfigured) {
+      return [{
+        id: 'mock-msg-1',
+        created_at: new Date().toISOString(),
+        name: 'Maria Silva',
+        phone: '(71) 99999-8888',
+        interest: 'Matrícula / Bolsas',
+        message: 'Gostaria de saber valores para o 3º ano do ensino médio.',
+        status: 'new'
+      }];
+    }
+    try {
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error("Erro ao buscar mensagens de contato:", error.message);
+        return [];
+      }
+      return data as ContactMessage[];
+    } catch (e) { return []; }
+  },
+
   getOrientations: async (studentId: string): Promise<Orientation[]> => {
     if (!isSupabaseConfigured) {
       return [{
         id: 'mock-ori-1',
         student_id: studentId,
         professional_id: 'mock-prof-1',
+        titulo: 'Acompanhamento Pedagógico',
         descricao: 'Aluno demonstra excelente participação nas atividades de grupo. Sugerimos manter o estímulo à leitura em casa.',
         created_at: new Date().toISOString(),
         professional_nome: 'Léia Neves Gomes'
@@ -87,7 +114,7 @@ export const dataService = {
         cpf_responsavel: '000.000.000-00',
         endereco_responsavel: 'Rua Exemplo, 123',
         whatsapp_responsavel: '71999999999',
-        created_at: new Date().toISOString()
+        observacoes: ''
       }];
     }
     try {

@@ -67,7 +67,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     // 2. Tenta criar/atualizar no banco (UPSERT)
     try {
-      const tipoPadrao = (id === SUPER_USER_ID || email === SUPER_USER_EMAIL) ? 'ADMIN' : 'RESPONSAVEL';
+      const tipoPadrao = (id === SUPER_USER_ID || email === SUPER_USER_EMAIL) ? 'ADMIN' : 'BLOG_ADMIN';
       const nomePadrao = (id === SUPER_USER_ID) ? 'Daniel Guimarães' : email.split('@')[0];
 
       const { error: insertError } = await supabase
@@ -96,7 +96,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       id: id,
       nome: (id === SUPER_USER_ID) ? 'Daniel Guimarães' : email.split('@')[0],
       email: email,
-      tipo: (id === SUPER_USER_ID || email === SUPER_USER_EMAIL) ? UserType.ADMIN : UserType.RESPONSAVEL,
+      tipo: (id === SUPER_USER_ID || email === SUPER_USER_EMAIL) ? UserType.ADMIN : UserType.BLOG_ADMIN,
       created_at: new Date().toISOString()
     };
     

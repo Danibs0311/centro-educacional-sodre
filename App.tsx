@@ -17,11 +17,8 @@ const Scholarships = React.lazy(() => import('./pages/Scholarships'));
 const Blog = React.lazy(() => import('./pages/Blog'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const Login = React.lazy(() => import('./pages/Login'));
 const BlogLogin = React.lazy(() => import('./pages/BlogLogin'));
 const BlogAdmin = React.lazy(() => import('./pages/BlogAdmin'));
-const Dashboard = React.lazy(() => import('./pages/Dashboard'));
-const AdminManagement = React.lazy(() => import('./pages/AdminManagement'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -52,11 +49,8 @@ const App: React.FC = () => {
             <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
             <Route path="/contato" element={<Layout><Contact /></Layout>} />
 
-            <Route path="/login" element={<Login />} />
             <Route path="/blog-login" element={<BlogLogin />} />
             <Route path="/blog-admin" element={<BlogAdmin />} />
-            <Route path="/admin-gestao" element={<AdminManagement />} />
-            <Route path="/area-responsavel" element={<Dashboard />} />
           </Routes>
         </Suspense>
       </AuthProvider>

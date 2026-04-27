@@ -101,9 +101,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <Link to="/contato" className="px-5 py-2.5 bg-brand-yellow text-brand-dark rounded-full hover:bg-yellow-400 transition font-black text-xs uppercase tracking-tighter whitespace-nowrap shadow-md hover:shadow-lg">
                 Matrículas Abertas
               </Link>
-              <Link to="/login" className="px-5 py-2.5 bg-brand-light text-brand-dark rounded-full hover:bg-blue-300 transition font-black text-xs uppercase tracking-tighter whitespace-nowrap shadow-md hover:shadow-lg flex items-center gap-2">
-                <GraduationCap size={16} /> Portal do Aluno
-              </Link>
             </div>
           </nav>
 
@@ -167,12 +164,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               </div>
             ))}
             
-            {/* Mobile Bottom CTA (Portal embaixo) */}
-            <Link 
-              to="/login" 
-              className="mt-6 w-full text-center px-4 py-4 bg-brand-light text-brand-dark rounded-xl font-black shadow-md uppercase tracking-tighter text-lg flex items-center justify-center gap-2 border-2 border-white"
-            >
-              <GraduationCap size={22} /> Portal do Aluno
             </Link>
           </div>
         )}
@@ -238,10 +229,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <li className="pt-2 flex flex-col gap-3">
                 <Link to="/contato" className="inline-flex items-center justify-center gap-2 bg-brand-yellow text-brand-dark px-6 py-3 rounded-xl hover:bg-white transition font-black text-xs uppercase tracking-tight shadow-lg">
                   Agendar Visita <ExternalLink size={14} />
-                </Link>
-                {/* Portal Destaque Embaixo no Rodapé */}
-                <Link to="/login" className="inline-flex items-center justify-center gap-2 bg-brand-light text-brand-dark px-6 py-3 rounded-xl hover:bg-blue-300 transition font-black text-xs uppercase tracking-tight shadow-lg">
-                  <GraduationCap size={16} /> Área do Aluno
                 </Link>
               </li>
             </ul>

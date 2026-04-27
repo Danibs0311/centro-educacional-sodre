@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { blogService } from '../services/blogService';
 import { BlogPost, UserType } from '../types';
-import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, LayoutDashboard, LogOut, Newspaper, Search, Loader2, GraduationCap } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, LayoutDashboard, LogOut, Newspaper, Search, Loader2, GraduationCap, MessageSquare, Phone, Calendar } from 'lucide-react';
 
 const BlogAdmin: React.FC = () => {
   const { user, logout, isAuthenticated, loading } = useAuth();
@@ -14,12 +14,22 @@ const BlogAdmin: React.FC = () => {
   const [currentPost, setCurrentPost] = useState<Partial<BlogPost>>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+  const [activeTab, setActiveTab] = useState<'posts' | 'messages'>('posts');
+  const [contactMessages, setContactMessages] = useState<any[]>([]);
+  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
   const fetchPosts = async () => {
     setIsLoadingPosts(true);
     const data = await blogService.getPosts();
     setPosts(data);
     setIsLoadingPosts(false);
+  };
+
+  const fetchMessages = async () => {
+    setIsLoadingMessages(true);
+    const data = await blogService.getContactMessages();
+    setContactMessages(data);
+    setIsLoadingMessages(false);
   };
 
   useEffect(() => {
@@ -33,6 +43,7 @@ const BlogAdmin: React.FC = () => {
         return;
     }
     fetchPosts();
+    fetchMessages();
   }, [isAuthenticated, user, navigate, loading]);
 
   const handleCreate = () => {
@@ -96,6 +107,20 @@ const BlogAdmin: React.FC = () => {
           <h1 className="text-xl font-bold text-gray-900">Painel Administrativo</h1>
         </div>
         <div className="flex items-center gap-4">
+          <div className="flex bg-gray-100 p-1 rounded-xl mr-4">
+            <button 
+              onClick={() => setActiveTab('posts')}
+              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'posts' ? 'bg-white text-brand-dark shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              Artigos
+            </button>
+            <button 
+              onClick={() => setActiveTab('messages')}
+              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'messages' ? 'bg-white text-brand-dark shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              Mensagens
+            </button>
+          </div>
           <span className="text-sm text-gray-500 hidden md:block">Administrador: <span className="font-bold text-brand-dark">{user.nome}</span></span>
           <button onClick={() => { logout(); navigate('/'); }} className="flex items-center gap-2 text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg transition text-sm font-bold">
             <LogOut size={18} /> Sair
@@ -109,15 +134,6 @@ const BlogAdmin: React.FC = () => {
               <p className="text-xs text-gray-400 font-bold uppercase mb-2">Artigos</p>
               <p className="text-2xl font-black text-gray-900">{posts.length}</p>
            </div>
-           {user.tipo === UserType.ADMIN && (
-             <Link to="/admin-gestao" className="md:col-span-1 bg-brand-yellow p-6 rounded-2xl shadow-lg border border-yellow-400 flex items-center justify-between group hover:scale-[1.02] transition-transform">
-                <div>
-                   <p className="text-xs text-brand-dark font-black uppercase mb-1">Escolar</p>
-                   <p className="text-xl font-black text-brand-dark">Gestão Alunos</p>
-                </div>
-                <GraduationCap className="text-brand-dark opacity-50 group-hover:opacity-100 transition-opacity" size={32} />
-             </Link>
-           )}
         </div>
 
         {isLoadingPosts ? (
@@ -194,6 +210,47 @@ const BlogAdmin: React.FC = () => {
                 </table>
               </div>
             </div>
+          </div>
+        ) : activeTab === 'messages' ? (
+          <div className="space-y-6 animate-in fade-in duration-300">
+             <div className="grid gap-4">
+                {contactMessages.map(msg => (
+                   <div key={msg.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                      <div className="flex flex-col md:flex-row gap-6">
+                         <div className="md:w-1/4 space-y-2">
+                            <div className="flex items-center gap-2">
+                               <div className="w-8 h-8 bg-brand-light/20 rounded-full flex items-center justify-center text-brand-dark font-black text-xs">
+                                  {msg.name[0]}
+                               </div>
+                               <div>
+                                  <p className="font-bold text-gray-900 text-sm leading-tight">{msg.name}</p>
+                                  <p className="text-[10px] text-gray-400 font-bold uppercase">{new Date(msg.created_at).toLocaleDateString()}</p>
+                               </div>
+                            </div>
+                            {msg.phone && (
+                               <a href={`https://wa.me/55${msg.phone.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-green-600 font-bold text-xs hover:underline">
+                                  <Phone size={14} /> {msg.phone}
+                               </a>
+                            )}
+                            {msg.interest && (
+                               <span className="inline-block text-[10px] font-black text-brand-dark bg-brand-light/10 px-2 py-0.5 rounded-full">
+                                  {msg.interest}
+                               </span>
+                            )}
+                         </div>
+                         <div className="md:w-3/4 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                            <p className="text-gray-700 text-sm font-medium leading-relaxed">{msg.message}</p>
+                         </div>
+                      </div>
+                   </div>
+                ))}
+                {contactMessages.length === 0 && (
+                   <div className="py-20 text-center bg-white rounded-2xl border border-dashed border-gray-200">
+                      <MessageSquare className="mx-auto text-gray-200 mb-2" size={48} />
+                      <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Nenhuma mensagem recebida.</p>
+                   </div>
+                )}
+             </div>
           </div>
         ) : (
           <div className="max-w-4xl mx-auto animate-in slide-in-from-bottom-4 duration-300">

@@ -1,5 +1,5 @@
 
-import { BlogPost } from '../types';
+import { BlogPost, ContactMessage } from '../types';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { MOCK_BLOG_POSTS } from '../constants';
 
@@ -84,5 +84,31 @@ export const blogService = {
       .eq('id', id);
 
     if (error) throw error;
+  },
+
+  getContactMessages: async (): Promise<ContactMessage[]> => {
+    if (!isSupabaseConfigured) {
+      return [{
+        id: 'mock-msg-1',
+        created_at: new Date().toISOString(),
+        name: 'Maria Silva',
+        phone: '(71) 99999-8888',
+        interest: 'Matrícula / Bolsas',
+        message: 'Gostaria de saber valores para o 3º ano do ensino médio.',
+        status: 'new'
+      }];
+    }
+    try {
+      const { data, error } = await supabase
+        .from('contact_messages')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error("Erro ao buscar mensagens de contato:", error.message);
+        return [];
+      }
+      return data as ContactMessage[];
+    } catch (e) { return []; }
   }
 };

@@ -160,7 +160,7 @@ const BlogAdmin: React.FC = () => {
               <form onSubmit={handleSave} className="p-8 space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">T+�tulo do Artigo</label>
+                    <label className="text-sm font-bold text-gray-700">Título do Artigo</label>
                     <input 
                       type="text" 
                       required
@@ -170,7 +170,7 @@ const BlogAdmin: React.FC = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">URL Amig+�vel (Slug)</label>
+                    <label className="text-sm font-bold text-gray-700">URL Amigável (Slug)</label>
                     <input 
                       type="text" 
                       required
@@ -198,7 +198,7 @@ const BlogAdmin: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700">Conte+�do (Markdown)</label>
+                  <label className="text-sm font-bold text-gray-700">Conteúdo (Markdown)</label>
                   <textarea 
                     required
                     value={currentPost.conteudo || ''}
@@ -299,7 +299,7 @@ const BlogAdmin: React.FC = () => {
                       <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Artigo</th>
                       <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Autor</th>
                       <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">A+�+�es</th>
+                      <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Ações</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">

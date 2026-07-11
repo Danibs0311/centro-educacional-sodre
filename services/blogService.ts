@@ -10,10 +10,9 @@ export const blogService = {
     }
 
     try {
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const queryPromise = supabase.from('posts').select('*').order('created_at', { ascending: false });
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
       if (error) {
         // Se a tabela não existir (código 42P01), retorna mocks
@@ -99,10 +98,9 @@ export const blogService = {
       }];
     }
     try {
-      const { data, error } = await supabase
-        .from('contact_messages')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const queryPromise = supabase.from('contact_messages').select('*').order('created_at', { ascending: false });
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
       if (error) {
         console.error("Erro ao buscar mensagens de contato:", error.message);
@@ -112,3 +110,4 @@ export const blogService = {
     } catch (e) { return []; }
   }
 };
+

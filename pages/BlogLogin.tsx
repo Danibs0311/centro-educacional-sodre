@@ -29,7 +29,12 @@ const BlogLogin: React.FC = () => {
       await login(email, password);
       // O useEffect acima cuidará do redirecionamento se for admin
       // Adicionamos um pequeno delay e desligamos o loading se a navegação não acontecer
-      setTimeout(() => setIsLoading(false), 2000);
+      setTimeout(() => {
+        setIsLoading(false);
+        if (!isAuthenticated) {
+          setError('Login concluído, mas o perfil não foi carregado corretamente. Atualize a página e tente de novo.');
+        }
+      }, 2000);
     } catch (err: any) {
       console.error("Erro no login admin:", err);
       const errorMessage = err?.message || String(err);

@@ -47,9 +47,11 @@ const Contact: React.FC = () => {
       setStatus('success');
       setFormData({ name: '', phone: '', interest: 'Matrícula / Bolsas', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending message:', error);
       setStatus('error');
+      // Store the exact error message in a new state variable or just alert it for debugging
+      alert("ERRO TÉCNICO: " + (error?.message || JSON.stringify(error)));
     } finally {
       setLoading(false);
     }

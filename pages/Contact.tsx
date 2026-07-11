@@ -24,7 +24,12 @@ const Contact: React.FC = () => {
     setStatus('idle');
 
     try {
-      const { error } = await supabase
+      // Cria uma promessa que rejeita após 10 segundos
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Tempo limite excedido')), 10000)
+      );
+
+      const supabaseCall = supabase
         .from('contact_messages')
         .insert([
           {
@@ -35,7 +40,9 @@ const Contact: React.FC = () => {
           }
         ]);
 
-      if (error) throw error;
+      const result: any = await Promise.race([supabaseCall, timeoutPromise]);
+      
+      if (result.error) throw result.error;
 
       setStatus('success');
       setFormData({ name: '', phone: '', interest: 'Matrícula / Bolsas', message: '' });

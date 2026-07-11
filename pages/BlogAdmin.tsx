@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { blogService } from '../services/blogService';
 import { BlogPost, UserType } from '../types';
-import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, LayoutDashboard, LogOut, Newspaper, Search, Loader2, GraduationCap, MessageSquare, Phone, Calendar } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, LayoutDashboard, LogOut, Newspaper, Search, Loader2, GraduationCap, MessageSquare, Phone, Calendar, MessageCircle } from 'lucide-react';
 
 const BlogAdmin: React.FC = () => {
   const { user, logout, isAuthenticated, loading } = useAuth();

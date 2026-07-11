@@ -24,25 +24,27 @@ const Contact: React.FC = () => {
     setStatus('idle');
 
     try {
-      // Cria uma promessa que rejeita após 10 segundos
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Tempo limite excedido')), 10000)
-      );
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/contact_messages`, {
+        method: 'POST',
+        headers: {
+          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          interest: formData.interest,
+          message: formData.message
+        })
+      });
 
-      const supabaseCall = supabase
-        .from('contact_messages')
-        .insert([
-          {
-            name: formData.name,
-            phone: formData.phone,
-            interest: formData.interest,
-            message: formData.message
-          }
-        ]);
-
-      const result: any = await Promise.race([supabaseCall, timeoutPromise]);
-      
-      if (result.error) throw result.error;
+      if (!response.ok) {
+        let errData;
+        try { errData = await response.json(); } catch(e) {}
+        throw new Error(errData?.message || `Erro HTTP: ${response.status}`);
+      }
 
       setStatus('success');
       setFormData({ name: '', phone: '', interest: 'Matrícula / Bolsas', message: '' });

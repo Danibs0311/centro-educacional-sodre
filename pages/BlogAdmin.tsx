@@ -134,6 +134,10 @@ const BlogAdmin: React.FC = () => {
               <p className="text-xs text-gray-400 font-bold uppercase mb-2">Artigos</p>
               <p className="text-2xl font-black text-gray-900">{posts.length}</p>
            </div>
+           <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+              <p className="text-xs text-gray-400 font-bold uppercase mb-2">Mensagens</p>
+              <p className="text-2xl font-black text-gray-900">{contactMessages.length}</p>
+           </div>
         </div>
 
         {isLoadingPosts ? (
@@ -242,8 +246,8 @@ const BlogAdmin: React.FC = () => {
                                </div>
                             </div>
                             {msg.phone && (
-                               <a href={`https://wa.me/55${msg.phone.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-green-600 font-bold text-xs hover:underline">
-                                  <Phone size={14} /> {msg.phone}
+                               <a href={`https://wa.me/55${msg.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá ${msg.name}, vi sua mensagem no site do Centro Educacional Sodré:\n\n"${msg.message}"\n\nComo posso ajudar?`)}`} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 mt-2 rounded-lg font-bold hover:bg-green-600 transition shadow-sm w-full md:w-auto">
+                                  <Phone size={16} /> Responder via WhatsApp
                                </a>
                             )}
                             {msg.interest && (

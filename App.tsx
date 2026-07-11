@@ -28,13 +28,23 @@ const ScrollToTop = () => {
   return null;
 };
 
+const GlobalWidgets = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/blog-admin' || pathname === '/blog-login') return null;
+  return (
+    <>
+      <WhatsAppButton />
+      <ChatWidget />
+    </>
+  );
+};
+
 const App: React.FC = () => {
   return (
     <HelmetProvider>
       <AuthProvider>
         <ScrollToTop />
-        <WhatsAppButton />
-        <ChatWidget />
+        <GlobalWidgets />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<Layout><Home /></Layout>} />

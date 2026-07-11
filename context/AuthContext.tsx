@@ -148,6 +148,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (data.user) {
         await ensureProfileExists(data.user.id, data.user.email!);
       }
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       throw err;

@@ -28,13 +28,15 @@ const BlogLogin: React.FC = () => {
     try {
       await login(email, password);
       // O useEffect acima cuidará do redirecionamento se for admin
-      // Mas forçamos uma verificação aqui para feedback imediato
+      // Adicionamos um pequeno delay e desligamos o loading se a navegação não acontecer
+      setTimeout(() => setIsLoading(false), 2000);
     } catch (err: any) {
       console.error("Erro no login admin:", err);
-      if (err.message.includes("Invalid login")) {
+      const errorMessage = err?.message || String(err);
+      if (errorMessage.includes("Invalid login")) {
         setError('E-mail ou senha incorretos.');
       } else {
-        setError(err.message || 'Erro ao acessar o painel administrativo.');
+        setError(errorMessage || 'Erro ao acessar o painel administrativo.');
       }
       setIsLoading(false);
     }

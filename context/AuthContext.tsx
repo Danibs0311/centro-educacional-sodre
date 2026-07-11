@@ -24,11 +24,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const fetchProfile = async (id: string, email: string): Promise<User | null> => {
     if (!isSupabaseConfigured) return null;
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', id)
-        .single();
+      const queryPromise = supabase.from('profiles').select('*').eq('id', id).single();
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
 
       if (error) {
         console.warn("Perfil não encontrado ou erro de política (RLS):", error.message);
@@ -70,13 +68,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const tipoPadrao = (id === SUPER_USER_ID || email === SUPER_USER_EMAIL) ? 'ADMIN' : 'BLOG_ADMIN';
       const nomePadrao = (id === SUPER_USER_ID) ? 'Daniel Guimarães' : email.split('@')[0];
 
-      const { error: insertError } = await supabase
-        .from('profiles')
-        .upsert({ 
-          id: id, 
-          nome: nomePadrao,
-          tipo: tipoPadrao
-        });
+      const queryPromise = supabase.from('profiles').upsert({ id: id, nome: nomePadrao, tipo: tipoPadrao });
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000));
+      const { error: insertError } = await Promise.race([queryPromise, timeoutPromise]) as any;
       
       if (!insertError) {
         profile = await fetchProfile(id, email);
@@ -112,7 +106,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const checkSession = async () => {
       try {
-        const { data } = await supabase.auth.getSession();
+        const sessionPromise = supabase.auth.getSession();
+        const timeoutPromise1 = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 8000));
+        const { data } = await Promise.race([sessionPromise, timeoutPromise1]) as any;
         if (data?.session?.user) {
           await ensureProfileExists(data.session.user.id, data.session.user.email!);
         }
@@ -142,7 +138,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     setLoading(true);
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+      const loginPromise = supabase.auth.signInWithPassword({ email, password: pass });
+      const timeoutPromise2 = new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 8000));
+      const { data, error } = await Promise.race([loginPromise, timeoutPromise2]) as any;
       if (error) throw error;
 
       if (data.user) {
@@ -183,3 +181,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
+

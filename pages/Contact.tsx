@@ -24,26 +24,17 @@ const Contact: React.FC = () => {
     setStatus('idle');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/contact_messages`, {
-        method: 'POST',
-        headers: {
-          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([{
           name: formData.name,
           phone: formData.phone,
           interest: formData.interest,
           message: formData.message
-        })
-      });
+        }]);
 
-      if (!response.ok) {
-        let errData;
-        try { errData = await response.json(); } catch(e) {}
-        throw new Error(errData?.message || `Erro HTTP: ${response.status}`);
+      if (error) {
+        throw new Error(error.message);
       }
 
       setStatus('success');

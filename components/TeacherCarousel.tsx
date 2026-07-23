@@ -70,16 +70,86 @@ const TEACHERS_INFANTIL = [
   }
 ];
 
+const TEACHERS_FUND2 = [
+  {
+    id: 1,
+    name: 'Prof. Roberto Dias',
+    subject: 'Matemática e Geometria',
+    education: 'Matemática (UFBA)',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 2,
+    name: 'Profa. Camila Nunes',
+    subject: 'Língua Portuguesa',
+    education: 'Letras (UNEB)',
+    image: 'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 3,
+    name: 'Prof. Felipe Mendes',
+    subject: 'Ciências',
+    education: 'Biologia (UFBA)',
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 4,
+    name: 'Profa. Sofia Lima',
+    subject: 'História',
+    education: 'História (UCSAL)',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 5,
+    name: 'Prof. André Souza',
+    subject: 'Geografia',
+    education: 'Geografia (UFBA)',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 6,
+    name: 'Profa. Júlia Costa',
+    subject: 'Artes',
+    education: 'Artes Plásticas (EBA-UFBA)',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 7,
+    name: 'Prof. Ricardo Gomes',
+    subject: 'Educação Física',
+    education: 'Educação Física (UFBA)',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 8,
+    name: 'Profa. Mariana Silva',
+    subject: 'Inglês',
+    education: 'Letras com Inglês (UNEB)',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 9,
+    name: 'Prof. Lucas Pereira',
+    subject: 'Redação',
+    education: 'Letras (UFBA)',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  }
+];
+
 interface TeacherCarouselProps {
-  segment: 'infantil' | 'fund1';
+  segment: 'infantil' | 'fund1' | 'fund2';
 }
 
 const TeacherCarousel: React.FC<TeacherCarouselProps> = ({ segment }) => {
-  const teachers = segment === 'infantil' ? TEACHERS_INFANTIL : TEACHERS_FUND1;
+  const teachers = segment === 'infantil' 
+    ? TEACHERS_INFANTIL 
+    : segment === 'fund1' 
+      ? TEACHERS_FUND1 
+      : TEACHERS_FUND2;
   
   // Duplicating the array to create a seamless infinite loop effect.
   // For infantil (3 cards), we repeat it 4 times so the screen is always full
-  // For fund1 (6 cards), repeating it 2 times is enough.
+  // For fund1 (6 cards) and fund2 (9 cards), repeating it 2 times is enough.
   const repeatedTeachers = segment === 'infantil' 
     ? [...teachers, ...teachers, ...teachers, ...teachers]
     : [...teachers, ...teachers];

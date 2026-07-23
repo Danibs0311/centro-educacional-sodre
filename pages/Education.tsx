@@ -76,8 +76,8 @@ const Education: React.FC<EducationPageProps> = ({ type, imageHash }) => {
           </div>
         </div>
       </div>
-      {/* Teacher Carousel specific for Fundamental 1 and Infantil */}
-      {(type === 'fund1' || type === 'infantil') && (
+      {/* Teacher Carousel specific for Fundamental 1, Fundamental 2 and Infantil */}
+      {(type === 'fund1' || type === 'fund2' || type === 'infantil') && (
         <TeacherCarousel segment={type} />
       )}
     </div>

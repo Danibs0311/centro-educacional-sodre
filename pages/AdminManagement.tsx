@@ -74,7 +74,7 @@ const AdminManagement: React.FC = () => {
    useEffect(() => {
       if (loading) return;
       if (!isAuthenticated || user?.tipo !== UserType.ADMIN) {
-         navigate('/blog-login');
+         navigate('/login');
          return;
       }
       loadData();
@@ -163,7 +163,7 @@ const AdminManagement: React.FC = () => {
          {/* Header Fixo */}
          <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-sm">
             <div className="flex items-center gap-3">
-               <Link to="/blog-admin" className="p-2 hover:bg-gray-100 rounded-full transition">
+               <Link to="/admin" className="p-2 hover:bg-gray-100 rounded-full transition">
                   <ArrowLeft size={20} className="text-gray-600" />
                </Link>
                <div className="flex flex-col">

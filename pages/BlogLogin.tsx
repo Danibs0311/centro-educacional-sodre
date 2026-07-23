@@ -16,7 +16,7 @@ const BlogLogin: React.FC = () => {
   // Se o usuário já estiver logado e for admin, redireciona
   useEffect(() => {
     if (isAuthenticated && (user?.tipo === UserType.ADMIN || user?.tipo === UserType.BLOG_ADMIN)) {
-      navigate('/blog-admin');
+      navigate('/admin');
     }
   }, [isAuthenticated, user, navigate]);
 

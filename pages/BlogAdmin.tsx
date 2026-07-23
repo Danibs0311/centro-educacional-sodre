@@ -35,7 +35,7 @@ const BlogAdmin: React.FC = () => {
   useEffect(() => {
     if (loading) return;
     if (!isAuthenticated) {
-      navigate('/blog-login');
+      navigate('/login');
       return;
     }
     if (user?.tipo !== UserType.BLOG_ADMIN && user?.tipo !== UserType.ADMIN) {

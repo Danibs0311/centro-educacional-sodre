@@ -30,7 +30,7 @@ const ScrollToTop = () => {
 
 const GlobalWidgets = () => {
   const { pathname } = useLocation();
-  if (pathname === '/blog-admin' || pathname === '/blog-login') return null;
+  if (pathname === '/admin' || pathname === '/login') return null;
   return (
     <>
       <WhatsAppButton />
@@ -59,8 +59,8 @@ const App: React.FC = () => {
             <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
             <Route path="/contato" element={<Layout><Contact /></Layout>} />
 
-            <Route path="/blog-login" element={<BlogLogin />} />
-            <Route path="/blog-admin" element={<BlogAdmin />} />
+            <Route path="/login" element={<BlogLogin />} />
+            <Route path="/admin" element={<BlogAdmin />} />
           </Routes>
         </Suspense>
       </AuthProvider>

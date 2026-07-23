@@ -237,7 +237,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="border-t border-white/10 mt-12 pt-8 container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
           <p>© {new Date().getFullYear()} Educandário Sodré.</p>
           <div className="flex items-center gap-6">
-            <Link to="/blog-login" className="flex items-center gap-1.5 hover:text-brand-yellow transition-colors group">
+            <Link to="/login" className="flex items-center gap-1.5 hover:text-brand-yellow transition-colors group">
               <Lock size={12} className="group-hover:scale-110 transition-transform" /> 
               Acesso Administrativo
             </Link>

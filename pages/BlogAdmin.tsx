@@ -246,7 +246,7 @@ const BlogAdmin: React.FC = () => {
                                </div>
                             </div>
                             {msg.phone && (
-                               <a href={`https://wa.me/55${msg.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá ${msg.name}, vi sua mensagem no site do Centro Educacional Sodré:\n\n"${msg.message}"\n\nComo posso ajudar?`)}`} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 mt-2 rounded-lg font-bold hover:bg-green-600 transition shadow-sm w-full md:w-auto">
+                               <a href={`https://wa.me/55${msg.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Olá ${msg.name}, vi sua mensagem no site do Educandário Sodré:\n\n"${msg.message}"\n\nComo posso ajudar?`)}`} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 mt-2 rounded-lg font-bold hover:bg-green-600 transition shadow-sm w-full md:w-auto">
                                   <Phone size={16} /> Responder via WhatsApp
                                </a>
                             )}

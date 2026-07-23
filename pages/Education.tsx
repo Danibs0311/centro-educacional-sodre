@@ -2,6 +2,7 @@ import React from 'react';
 import { CONTENT } from '../constants';
 import { ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
+import TeacherCarousel from '../components/TeacherCarousel';
 
 interface EducationPageProps {
   type: 'infantil' | 'fund1' | 'fund2' | 'medio';
@@ -75,6 +76,11 @@ const Education: React.FC<EducationPageProps> = ({ type, imageHash }) => {
           </div>
         </div>
       </div>
+      
+      {/* Teacher Carousel specific for Fundamental 1 */}
+      {type === 'fund1' && (
+        <TeacherCarousel />
+      )}
     </div>
   );
 };

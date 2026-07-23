@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookOpen, GraduationCap } from 'lucide-react';
 
-const TEACHERS = [
+const TEACHERS_FUND1 = [
   {
     id: 1,
     name: 'Prof. João Silva',
@@ -46,9 +46,43 @@ const TEACHERS = [
   },
 ];
 
-const TeacherCarousel: React.FC = () => {
-  // Duplicating the array to create a seamless infinite loop effect
-  const repeatedTeachers = [...TEACHERS, ...TEACHERS];
+const TEACHERS_INFANTIL = [
+  {
+    id: 1,
+    name: 'Profa. Juliana Mendes',
+    subject: 'Desenvolvimento Infantil',
+    education: 'Pedagogia (UFBA)',
+    image: 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 2,
+    name: 'Profa. Fernanda Lima',
+    subject: 'Recreação e Artes',
+    education: 'Pedagogia com foco em Artes',
+    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    id: 3,
+    name: 'Prof. Marcos Rocha',
+    subject: 'Musicalização Infantil',
+    education: 'Licenciatura em Música (UFBA)',
+    image: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+  }
+];
+
+interface TeacherCarouselProps {
+  segment: 'infantil' | 'fund1';
+}
+
+const TeacherCarousel: React.FC<TeacherCarouselProps> = ({ segment }) => {
+  const teachers = segment === 'infantil' ? TEACHERS_INFANTIL : TEACHERS_FUND1;
+  
+  // Duplicating the array to create a seamless infinite loop effect.
+  // For infantil (3 cards), we repeat it 4 times so the screen is always full
+  // For fund1 (6 cards), repeating it 2 times is enough.
+  const repeatedTeachers = segment === 'infantil' 
+    ? [...teachers, ...teachers, ...teachers, ...teachers]
+    : [...teachers, ...teachers];
 
   return (
     <div className="w-full py-16 bg-white overflow-hidden">

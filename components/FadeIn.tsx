@@ -10,10 +10,10 @@ interface FadeInProps {
 
 const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, direction = 'up', className = '' }) => {
   const directions = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
+    up: { y: 30, x: 0 },
+    down: { y: -30, x: 0 },
+    left: { x: 30, y: 0 },
+    right: { x: -30, y: 0 },
     none: { x: 0, y: 0 }
   };
 
@@ -28,11 +28,11 @@ const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, direction = 'up', 
         x: 0, 
         y: 0 
       }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, amount: 0.1 }}
       transition={{ 
-        duration: 0.7, 
+        duration: 1.2, 
         delay: delay, 
-        ease: [0.21, 0.47, 0.32, 0.98] 
+        ease: "easeInOut" 
       }}
       className={className}
     >

@@ -47,12 +47,11 @@ const Home: React.FC = () => {
                 <div className="inline-flex items-center gap-2 py-1.5 px-6 rounded-full bg-white/10 border border-white/20 text-brand-yellow text-sm font-bold tracking-wider mb-8 uppercase backdrop-blur-sm shadow-xl">
                   <MapPin size={16} /> Águas Claras - Salvador
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-[1.1] drop-shadow-2xl">
-                  <span className="block text-white">Educandário</span>
-                  <span className="block text-brand-yellow">Sodré</span>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-none drop-shadow-2xl">
+                  Educandário Sodré
                 </h1>
-                <p className="text-xl md:text-2xl font-light text-brand-light max-w-xl leading-relaxed mb-10">
-                  Mais de 30 anos de tradição em qualidade de ensino e <span className="text-white font-bold">formação do caráter</span> para um futuro brilhante.
+                <p className="text-xl md:text-3xl font-light text-brand-light max-w-3xl leading-relaxed drop-shadow-md mb-10">
+                  Qualidade de ensino e <span className="text-brand-yellow font-bold">formação do caráter</span> para um futuro brilhante.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link to="/contato" className="px-8 py-4 bg-brand-yellow text-brand-dark font-black rounded-xl hover:bg-yellow-400 hover:scale-105 transition transform text-center flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">

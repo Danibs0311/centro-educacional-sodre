@@ -59,8 +59,8 @@ const NAE: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TEAM_MEMBERS.map((member) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TEAM_MEMBERS.filter(member => member.ativo !== false).map((member) => (
               <Link
                 key={member.slug}
                 to={`/equipe/${member.slug}`}

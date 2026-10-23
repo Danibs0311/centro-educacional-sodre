@@ -21,6 +21,7 @@ export interface Professional {
   bio: string;
   abordagens: string[];
   image: string;
+  ativo?: boolean;
 }
 
 

@@ -46,7 +46,8 @@ export const TEAM_MEMBERS: Professional[] = [
       "Orientação e suporte direto às famílias",
       "Acompanhamento sistemático do progresso escolar"
     ],
-    image: "https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/leia-sodre-prof.jpg"
+    image: "https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/leia-sodre-prof.jpg",
+    ativo: false
   },
   {
     slug: 'neuropsicopedagogia',
@@ -60,7 +61,8 @@ export const TEAM_MEMBERS: Professional[] = [
       "Reabilitação neuropsicológica",
       "Estratégias baseadas em neuroplasticidade"
     ],
-    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400",
+    ativo: true
   },
   {
     slug: 'psicologia',
@@ -74,7 +76,8 @@ export const TEAM_MEMBERS: Professional[] = [
       "Promoção de competências socioemocionais",
       "Prevenção ao bullying e ansiedade escolar"
     ],
-    image: "https://images.unsplash.com/photo-1559839734-2b71f1e59816?auto=format&fit=crop&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1559839734-2b71f1e59816?auto=format&fit=crop&q=80&w=400",
+    ativo: true
   },
   {
     slug: 'fonoaudiologia',
@@ -88,7 +91,8 @@ export const TEAM_MEMBERS: Professional[] = [
       "Aprimoramento da linguagem expressiva e compreensiva",
       "Assessoria aos professores sobre processamento auditivo"
     ],
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=400",
+    ativo: true
   }
 ];
 

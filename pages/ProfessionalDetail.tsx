@@ -8,7 +8,7 @@ const ProfessionalDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const professional = TEAM_MEMBERS.find(m => m.slug === slug);
 
-  if (!professional) {
+  if (!professional || professional.ativo === false) {
     return <Navigate to="/nucleo-atendimento-especializado" replace />;
   }
 
